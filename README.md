@@ -1,6 +1,6 @@
 # Hephestus
 
-A skunkworks project to automate the windows image build
+A project to automate the windows image build
 
 ## Design Things
 
