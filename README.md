@@ -22,15 +22,16 @@ A collection of python scripts to use on a scheduled AWS lambda to:
 * windows update specific steps will trigger on `windows-update/*` titled branches 
 * workflow behaviour will depend on if it is a `widnows-update/*` push or merge to master
 
+### Undecided Stuff / Stuff to Investigate
+
+* where to gen github tokens from, shouldn't be linked to a single engineers creds, do we have CCI github bot creds?
+
 ### Configuration
 
 All configuration data will be passed as environment variables:
 
 * USERNAME : The git username to use for the git ops
 * PASSWORD : The git password to use for the git ops
-
-* CCI_USERNAME : The username to use for the CCI ops
-* CCI_PASSWORD : The password to use for the CCI ops
 
 ## Development
 
@@ -42,12 +43,9 @@ use [draw.io](https://draw.io) to modify the image with the `docs/windows-machin
 
 ## TODO
 
-* write tests for update-machine-images script
-  * add in pr monitoring to Gitter class
-  * read in name and email from env for git commit message (currently hard coded to myself)
-
-* write and test cci ops scripts
-
-* do some architectual fanagling about how this will run in lambda (a single python program, some chained lambdas ??)
+* Finish writing machine-image updater script and tests
+* Start on vm-service updater script and tests
+* set up lambdas
+  * possibly via terraform in execution-infrastructure, probs doesn't belong in our main terraform
 
 
