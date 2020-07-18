@@ -1,4 +1,4 @@
-# Hephestus
+# Hephaestus
 
 A project to automate the windows image build
 
@@ -26,6 +26,10 @@ A collection of python scripts to use on a scheduled AWS lambda to:
 
 * where to gen github tokens from, shouldn't be linked to a single engineers creds, do we have CCI github bot creds?
 
+
+### Lambda Structure
+Each lambda will use the whole hephaestus package, and an entry point module will determine the behaviour depending on how the lambda calls
+
 ### Configuration
 
 All configuration data will be passed as environment variables:
@@ -33,9 +37,18 @@ All configuration data will be passed as environment variables:
 * USERNAME : The git username to use for the git ops
 * PASSWORD : The git password to use for the git ops
 
-## Development
+#### VM-Service Updater
+Calling requires a map of the images to their URL formatted as 
 
-A dockerfile exists to make a container to use as  development environment, the repo will have to be mounted into the container
+```python
+  {"windows-server-2019-base" : "base",
+   "windows-server-2019-nvidia-small" : "nvidia-small",
+   "windows-server-2019-nvidia-medium" : "nvidia-medium",
+   "windows-server-2019-nvidia-large" : "nvidia-large"}
+```
+
+## Development
+Developed in a `python3:buster` where the project is attached as a bind, and the `requirements.txt` is loaded manually. Once CI is implemented the CI can take care of building a dev conatiner with the latest requirements and stick its somewhere
 
 ### Image Diagram modification
 
@@ -44,8 +57,9 @@ use [draw.io](https://draw.io) to modify the image with the `docs/windows-machin
 ## TODO
 
 * Finish writing machine-image updater script and tests
-* Start on vm-service updater script and tests
+* Merge requirements.txt to one top level package
+* Start on vm-service tests
 * set up lambdas
   * possibly via terraform in execution-infrastructure, probs doesn't belong in our main terraform
-
-
+* design lambda CLI implementation
+* setup CCI workflows
